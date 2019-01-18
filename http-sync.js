@@ -94,7 +94,7 @@ CurlRequest.prototype = {
 
         ret.body = '';
         if (ret.body_length) {
-            var _b = new Buffer(ret.body_length);
+            var _b = new Buffer.alloc(ret.body_length);
             ret.body = curllib.body(_b);
         }
 
@@ -151,7 +151,7 @@ exports.request = function(options) {
     options.body = options.body || '';
     if (options.auth && !options.headers['Authorization']) {
         //basic auth
-        options.headers['Authorization'] = 'Basic ' + new Buffer(options.auth).toString('base64');
+        options.headers['Authorization'] = 'Basic ' + new Buffer.from(options.auth).toString('base64');
     }
     options.rejectUnauthorized = options.rejectUnauthorized === false ?
 	false : true;
